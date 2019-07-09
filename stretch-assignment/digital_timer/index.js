@@ -3,6 +3,11 @@ const secondOnes = document.querySelector("#secondOnes");
 const msHundreds = document.querySelector("#msHundreds");
 const msTens = document.querySelector("#msTens");
 
+secondTens.style.color = "red";
+secondOnes.style.color = "red";
+msHundreds.style.color = "red";
+msTens.style.color = "red";
+
 
 
 let ms10 = 0;
@@ -22,6 +27,7 @@ button.classList.add('btn-1');
 button.textContent = "Start";
 
 const body = document.querySelector('body');
+body.style.backgroundColor = "blue";
 body.appendChild(button);
 
 // Adding style to body
@@ -32,6 +38,7 @@ body.style.flexDirection = "column";
 // Adding close button
 const closeButton = document.createElement("button");
 closeButton.classList.add('btn-1');
+closeButton.classList.add('stopper');
 closeButton.textContent = "Stop";
 body.appendChild(closeButton);
 
@@ -49,26 +56,48 @@ buttons.forEach(item => {
 });
 
 
+
 // Evenlistener
 
-button.addEventListener("click", item => {
+button.addEventListener("click", function() {
+    // testing
     console.log("Hey");
     
-    
-    setInterval(function (){
+    // Start Button event listener
+    let timeWatch = setInterval(function (){
         // console.log("Sean");
+        // console.log(timeWatch);
         ms10+=1;
+
         MilliSecond();
         firstSecond();
         tenSecond();
-        stopper();
+        
 
-    },1000);
+    },500);
+
+    let stopButton = document.querySelector(".stopper");
+
+    // Stop Button event listener
+    stopButton.addEventListener("click", function(){
+        // testing
+        console.log("Stopped");
+        clearInterval(timeWatch);
+
+    
+        
+    
+    });
 
 
     
-},true);
 
+   
+
+    
+});
+
+// timer increments
 function MilliSecond(){
     if(ms10 === 6){
         ms10 = 0;
@@ -76,7 +105,7 @@ function MilliSecond(){
     }
     console.log(ms10);
     msTens.textContent= ms10;
-}
+};
 
 function firstSecond(){
     if(ms100 === 6){
@@ -95,22 +124,6 @@ function tenSecond(){
     console.log(sec1);
     secondOnes.textContent = sec1;
 }
-
-function stopper(){
-    if(sec10 === 6){
-        sec10 = 0;
-        clearTimeout();
-    }
-    console.log(sec10);
-    secondTens.textContent= sec10;
-}
-
-
-closeButton.addEventListener("click", ev =>{
-    
-});
-
-
 
 
 
